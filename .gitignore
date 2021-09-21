@@ -1,1 +1,8 @@
+#MACOS
 .DS_STORE
+
+
+#Terraform
+.terraform*
+terraform.tfvars
+terraform.tfstate*
