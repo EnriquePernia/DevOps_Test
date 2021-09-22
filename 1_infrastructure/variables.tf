@@ -20,3 +20,8 @@ variable "aws_vpc" {
   type = string
   description = "aws vpc"
 }
+
+variable "aws_az" {
+  type = list
+  description = "aws az"
+}
