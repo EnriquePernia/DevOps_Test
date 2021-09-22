@@ -15,3 +15,8 @@ variable "aws_key" {
     type = string
     description = "aws key"
 }
+
+variable "aws_vpc" {
+  type = string
+  description = "aws vpc"
+}
