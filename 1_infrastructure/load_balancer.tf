@@ -17,11 +17,23 @@ resource "aws_lb_target_group" "holded_lb_target_group" {
     path                = "/"
   }
 }
+
+resource "aws_lb_listener" "lb_listener" {
+  load_balancer_arn = aws_lb.holded.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+# Forward traffic to target group
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.holded_lb_target_group.arn
+  }
+}
 resource "aws_lb" "holded" {
   name               = "holded"
   load_balancer_type = "application"
   subnets = data.aws_subnet_ids.holded_subnets.ids
-  security_groups    = ["${aws_security_group.elb_sg.id}"]
+  security_groups    = [aws_security_group.elb_sg.id]
 }
 
 # resource "aws_lb_listener" "holded_listener" {
