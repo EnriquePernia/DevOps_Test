@@ -35,18 +35,3 @@ resource "aws_lb" "holded" {
   subnets = data.aws_subnet_ids.holded_subnets.ids
   security_groups    = [aws_security_group.elb_sg.id]
 }
-
-# resource "aws_lb_listener" "holded_listener" {
-#   load_balancer_arn = aws_lb.holded.arn
-#   port              = "80"
-#   protocol          = "HTTP"
-
-#   default_action {
-#     type = "redirect"
-
-#     redirect {
-#       port        = "8080"
-#       protocol    = "HTTP"
-#     }
-#   }
-# }

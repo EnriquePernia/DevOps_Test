@@ -5,9 +5,7 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id      = var.aws_vpc
 
   ingress {
-    # security_groups = [ aws_security_group.elb_sg.id ]
-    cidr_blocks = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    security_groups = [ aws_security_group.elb_sg.id ] # To only be accesible from load balancer
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -27,7 +25,7 @@ resource "aws_security_group" "ec2_sg" {
 
 # Create security group for ELB (Elastic load balancer)
 resource "aws_security_group" "elb_sg" {
-  name = "Lb_sg"
+  name = "lb_sg"
 
   ingress {
     from_port   = 80

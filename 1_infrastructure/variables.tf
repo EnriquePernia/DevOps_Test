@@ -25,3 +25,13 @@ variable "aws_az" {
   type = list
   description = "aws az"
 }
+
+variable "aws_inst_type" {
+  type = string
+  description = "aws instance type"
+}
+
+variable "aws_image_id" {
+  type = string
+  description = "aws image id"
+}

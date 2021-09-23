@@ -5,10 +5,10 @@ data "template_file" "web-userdata" {
 # Needed por ASG configuration
 resource "aws_launch_configuration" "holded" {
   name          = "holded"
-  image_id      = "ami-0d1bf5b68307103c2"
-  instance_type = "t2.micro"
+  image_id      = var.aws_image_id
+  instance_type = var.aws_inst_type
   key_name = var.aws_key
-  security_groups = ["sg-0663de3e394f4149c"]
+  security_groups = [aws_security_group.ec2_sg.id]
   user_data = data.template_file.web-userdata.rendered
 
   # Ensure we have a launch configuration allways available 
