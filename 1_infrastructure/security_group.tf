@@ -5,12 +5,21 @@ resource "aws_security_group" "ec2_sg" {
   vpc_id      = var.aws_vpc
 
   ingress {
+    # security_groups = [ aws_security_group.elb_sg.id ]
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
   }
-
+  
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
   tags = {
     Name = "ec2_sg"
   }
@@ -32,9 +41,10 @@ resource "aws_security_group" "elb_sg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {
-    Name = "Lb_sg"
+    Name = "lb_sg"
   }
 }
