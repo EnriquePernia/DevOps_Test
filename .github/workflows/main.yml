@@ -6,42 +6,70 @@ on:
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+        
     steps:
-      # Step 1
-      - uses: actions/checkout@v2
-      # Step 2
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
-      # Step 3
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      # Step 4
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
-      # Step 5
-      - name: Build Application and Run unit Test
-        run: python app.py & pytest
+      - name: Check out code
+        uses: actions/checkout@v2
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Build image
+        run: docker build -t go-test .
+      
+      - name: Test container
+        run: docker run go-test test -vvv
 
   continuous-deployment:
     runs-on: ubuntu-latest
     needs: [continuous-integration]
     if: github.ref == 'refs/heads/main'
     steps:
-     # Step 1
-      - name: Configure AWS credentials
+      # DockerHub deployment
+      - 
+        name: Check out code
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            gracia000/sample_api:${{ github.run_number }}
+            gracia000/sample_api:latest
+            
+      # AWS Deployment
+      - 
+        name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-     # Step 2
-      - name: Create CodeDeploy Deployment
+
+      - 
+        name: Create CodeDeploy Deployment
         id: deploy
         run: |
           aws deploy create-deployment \
