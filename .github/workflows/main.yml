@@ -56,8 +56,8 @@ jobs:
           context: ./2_application
           push: true
           tags: |
-            gracia000/sample_api:${{ github.run_number }}
-            gracia000/sample_api:latest
+            gracia000/holded_app:${{ github.run_number }}
+            gracia000/holded_app:latest
             
       # AWS Deployment
       - 
@@ -73,7 +73,7 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-            --application-name application-name \
-            --deployment-group-name AppDeploymentGroupName \
+            --application-name holded_app \
+            --deployment-group-name holded_group \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
