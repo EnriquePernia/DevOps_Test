@@ -14,10 +14,14 @@ usermod -a -G docker ec2-user
 sudo yum update 
 sudo yum install -y ruby
 sudo yum install wget
-wget https://aws-codedeploy-ap-southeast-1.s3.ap-southeast-1.amazonaws.com/latest/install
+wget https://aws-codedeploy-eu-west-1.s3.eu-west-1.amazonaws.com/latest/install
 chmod +x ./install
 sudo ./install auto
 sudo service codedeploy-agent start
 
-# Cole repository
+# Code repository
 git clone https://github.com/EnriquePernia/DevOps_Test.git
+cd DevOps_Test
+cd 2_application
+docker build -t go-app .
+docker run -p 80:8080 go-app
