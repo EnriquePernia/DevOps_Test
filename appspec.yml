@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
  - source: .
-   destination: /home/ec2-user/
+   destination: /home/ec2-user/DevOps_Test
 hooks:
   ApplicationStop:
    - location: 2_application/stop_server.sh
