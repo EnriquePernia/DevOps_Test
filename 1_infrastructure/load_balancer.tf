@@ -9,9 +9,9 @@ resource "aws_lb_target_group" "holded_lb_target_group" {
   vpc_id   = var.aws_vpc
   health_check {
     healthy_threshold   = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 5
     timeout             = 3
-    interval            = 30
+    interval            = 60
     protocol            = "HTTP"
     port                = 80
     path                = "/"

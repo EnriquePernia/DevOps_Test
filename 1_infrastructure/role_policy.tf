@@ -1,9 +1,3 @@
-provider "aws" {
-  region     = var.aws_region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
-}
-
 # This gives EC2 instances access to S3 buckets
 data "aws_iam_policy" "CodeDeploy_EC2" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
