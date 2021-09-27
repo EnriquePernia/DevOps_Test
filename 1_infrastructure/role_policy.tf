@@ -3,24 +3,24 @@ data "aws_iam_policy" "CodeDeploy_EC2" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
 }
 
+data "aws_iam_policy_document" "instance-assume-role-policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com",
+                      "codedeploy.amazonaws.com"]
+    }
+  }
+}
+
 resource "aws_iam_role" "codeDeploy_role_EC2" {
   name = "EC2_CodeDeploy_role"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      },
-    ]
-  })
+  assume_role_policy = data.aws_iam_policy_document.instance-assume-role-policy.json
 
   tags = {
     Role = "EC2-CodeDeploy"
@@ -49,19 +49,7 @@ resource "aws_iam_role" "codeDeploy_role" {
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
-        Sid    = ""
-        Principal = {
-          Service = "codedeploy.amazonaws.com"
-        }
-      },
-    ]
-  })
+  assume_role_policy = data.aws_iam_policy_document.instance-assume-role-policy.json
 
   tags = {
     Role = "CodeDeploy"
