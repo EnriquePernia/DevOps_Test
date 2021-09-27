@@ -5,6 +5,6 @@ files:
    destination: /home/ec2-user/
 hooks:
   ApplicationStart:
-   - location: 2_application/start_server.sh
+   - location: DevOps_Test/2_application/start_server.sh
      timeout: 300
      runas: root
