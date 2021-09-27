@@ -15,4 +15,3 @@ The infrastructure consists on an ASG that generates 2 EC2 instances distrubuted
 This way, if a region goes down, we still have available the application in the other ones.
 The load balancer distribute the inbound traffic among all EC2 instances on the target group(Instances that belong to the ASG).
 The security groups allow ec2s to only accept incoming connections from the load balancer thus improving security.
- 
