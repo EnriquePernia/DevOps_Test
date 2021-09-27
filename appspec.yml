@@ -4,7 +4,11 @@ files:
  - source: .
    destination: /home/ec2-user/
 hooks:
+  ApplicationStop:
+   - location: 2_application/stop_server.sh
+     timeout: 300
+     runas: root
   ApplicationStart:
-   - location: DevOps_Test/2_application/start_server.sh
+   - location: 2_application/start_server.sh
      timeout: 300
      runas: root
