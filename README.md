@@ -16,10 +16,15 @@ Protection rules are enabled for <b>main</b> ( Production ) and <b>development</
 ![image](https://user-images.githubusercontent.com/36536477/135106749-86c383ac-cb11-445c-ad64-d33949257602.png)
 
 The infrastructure consists on an ASG that generates 2 EC2 instances distrubuted among all availability zones of Ireland region(This ensures high availability for our application.)
+
 This way, if a region goes down, we still have available the application in the other ones.
+
 The load balancer distribute the inbound traffic among all EC2 instances on the target group(Instances that belong to the ASG).
+
 The security groups allow ec2s to only accept incoming connections from the load balancer thus improving security.
-IAM roles must be assigned to the ec2 instances so that the codeDeploy agent can make changes and thus implement continuous deployment
+
+IAM roles must be assigned to the ec2 instances so that the codeDeploy agent can make changes and thus implement continuous deployment.
+
 The ASG allows us to manage the number of instances raised depending on the accesses, so that if there is a lot of traffic, we will have more instances to be able to address it and when it decreases, the number of instances will do so as well.
 
 
