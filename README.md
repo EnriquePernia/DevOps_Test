@@ -20,6 +20,7 @@ This way, if a region goes down, we still have available the application in the 
 The load balancer distribute the inbound traffic among all EC2 instances on the target group(Instances that belong to the ASG).
 The security groups allow ec2s to only accept incoming connections from the load balancer thus improving security.
 IAM roles must be assigned to the ec2 instances so that the codeDeploy agent can make changes and thus implement continuous deployment
+The ASG allows us to manage the number of instances raised depending on the accesses, so that if there is a lot of traffic, we will have more instances to be able to address it and when it decreases, the number of instances will do so as well.
 
 
 ## Application (CI/CD)
