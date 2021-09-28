@@ -10,7 +10,7 @@ import (
 
 func appHandler(w http.ResponseWriter, r *http.Request) {
 
-  fmt.Println(time.Now(), "Hello from my new fresh server")
+  fmt.Println(time.Now(), "Hello from my new fresh server UPDATED")
   io.WriteString(w, `{"Hello from my new fresh server"}`)
 }
 
