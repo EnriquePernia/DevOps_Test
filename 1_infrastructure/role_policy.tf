@@ -1,6 +1,6 @@
 # This gives EC2 instances access to S3 buckets
 data "aws_iam_policy" "CodeDeploy_EC2" {
-  arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
+  arn = var.aws_EC2codeDeploy_ARN
 }
 
 data "aws_iam_policy_document" "instance-assume-role-policy" {
@@ -41,7 +41,7 @@ resource "aws_iam_role_policy" "codeDeploy_ec2_policy" {
 # Now lets edit code deploy
 # THis gives codeDeploy access to EC2
 data "aws_iam_policy" "CodeDeploy" {
-  arn = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
+  arn = var.aws_codeDeploy_ARN
 }
 
 resource "aws_iam_role" "codeDeploy_role" {
