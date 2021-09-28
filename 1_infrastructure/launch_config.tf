@@ -16,7 +16,3 @@ resource "aws_launch_configuration" "holded" {
     create_before_destroy = true
   }
 }
-
-output "user_data" {
-  value = data.template_file.web-userdata.rendered
-}

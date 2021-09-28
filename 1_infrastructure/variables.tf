@@ -35,3 +35,14 @@ variable "aws_image_id" {
   type = string
   description = "aws image id"
 }
+
+variable "aws_codeDeploy_ARN" {
+  type = string
+  description = "aws codeDeploy policy"
+}
+
+
+variable "aws_EC2codeDeploy_ARN" {
+  type = string
+  description = "aws EC2codeDeploy policy"
+}
