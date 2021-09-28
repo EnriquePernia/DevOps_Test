@@ -13,6 +13,7 @@ Protection rules are enabled for <b>main</b> ( Production ) and <b>development</
 - IAM roles
 - CodeDeploy application
 
+![image](https://user-images.githubusercontent.com/36536477/135106749-86c383ac-cb11-445c-ad64-d33949257602.png)
 
 The infrastructure consists on an ASG that generates 2 EC2 instances distrubuted among all availability zones of Ireland region(This ensures high availability for our application.)
 This way, if a region goes down, we still have available the application in the other ones.
