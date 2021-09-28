@@ -25,7 +25,7 @@ jobs:
         run: docker build -t go-test ./2_application/
       
       - name: Test container
-        run: docker run go-test test -vvv
+        run: docker run go-test go test
 
   continuous-deployment:
     runs-on: ubuntu-latest
