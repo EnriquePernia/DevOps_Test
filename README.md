@@ -18,6 +18,8 @@ Protection rules are enabled for <b>main</b> ( Production ) and <b>development</
 The infrastructure consists on an ASG that generates 2 EC2 instances distrubuted among all availability zones of Ireland region(This ensures high availability for our application.)
 This way, if a region goes down, we still have available the application in the other ones.
 
+The setup of the instances is done by run.sh script, passed as user_data so the instance execute it on its first boot up.
+
 Variables are stored on a .tfvars file, this way we improve mantainability of the code.
 
 The load balancer distribute the inbound traffic among all EC2 instances on the target group(Instances that belong to the ASG).
