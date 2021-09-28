@@ -16,8 +16,9 @@ Protection rules are enabled for <b>main</b> ( Production ) and <b>development</
 ![image](https://user-images.githubusercontent.com/36536477/135106749-86c383ac-cb11-445c-ad64-d33949257602.png)
 
 The infrastructure consists on an ASG that generates 2 EC2 instances distrubuted among all availability zones of Ireland region(This ensures high availability for our application.)
-
 This way, if a region goes down, we still have available the application in the other ones.
+
+Variables are stored on a .tfvars file, this way we improve mantainability of the code.
 
 The load balancer distribute the inbound traffic among all EC2 instances on the target group(Instances that belong to the ASG).
 
@@ -56,6 +57,8 @@ Test_server.go -> Where the testing functions are stored.
     * aws_az         =
     * aws_inst_type  =
     * aws_image_id   =
+    * aws_codeDeploy_ARN =
+    * aws_EC2codeDeploy_ARN =
 - Then run `terraform init` & `terraform apply` command.
 - When it ends, you whould have set up the whole aws infrastructure.
 - In AWS go to EC2 > Load Balancer > holded. Copy the public address and paste it on your web browser, you will be redirected to the server on your EC2 instances.
