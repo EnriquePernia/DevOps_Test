@@ -2,7 +2,7 @@
 Test of DevOps practices.
 
 ## Branch protection
-- Protection rules are enabled for <b>main</b> ( Production ) and <b>development</b> branches, ensuring no one can commit directly to them. Instead, a new branch has to be created for each new feature as pull requests are the only thing accepted in protected branches.
+Protection rules are enabled for <b>main</b> ( Production ) and <b>development</b> branches, ensuring no one can commit directly to them. Instead, a new branch has to be created for each new feature as pull requests are the only thing accepted in protected branches.
 
 
 ## Infrastructure:
@@ -37,6 +37,8 @@ Server.go -> Where the API code is stored
 Test_server.go -> Where the testing functions are stored.
 
 ## How to use
+- Set up your dockerHub user and password as repository secrets. Store them as USER, PASSWORD
+- Do the same with your aws credentials. Store them AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 - Clone the repository and go to the 1_infrastructure folder.
 - Create a terraform.tfvars file and store the following data:
     * aws_access_key =
