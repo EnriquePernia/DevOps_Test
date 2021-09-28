@@ -14,7 +14,7 @@ resource "aws_lb_target_group" "holded_lb_target_group" {
     interval            = 60
     protocol            = "HTTP"
     port                = 80
-    path                = "/"
+    path                = "/health-check"
   }
 }
 
